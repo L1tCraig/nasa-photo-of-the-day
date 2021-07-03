@@ -1,24 +1,45 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import axios from 'axios';
+import Daily from "./Components/Daily";
+import Search from "./Components/Search";
+import Yesterday from "./Components/Yesterday";
 
 function App() {
-  const [nasaApi] = useState('https://api.nasa.gov/planetary/apod?api_key=0DphGOr4UI9FSOtkhXg6XzG4nLpNLuS45FwxrEvb')
+  const [nasaApi] = useState('https://api.nasa.gov/planetary/apod?api_key=0YXsSvTwb77mZRrYpbUdXXLKHTOlzsf7y7c1uqRC')
   const [apiInfo, setApiInfo] = useState([])
+  const [ymd, setYmd] = useState('')
+  const [date, setDate] = useState('')
+  const [pastInfo, setPastInfo] = useState([])
   useEffect(() => {
     axios.get(nasaApi)
     .then((keyInfo) => {
       setApiInfo(keyInfo.data)
     })
   },[])
-  console.log(apiInfo.date)
+   useEffect(() => {
+  axios.get(nasaApi + '&date=' + {date})
+    .then((dateInfo) =>{
+      setPastInfo(dateInfo.data)
+    })
+  },[date]) 
+
+
+  const ymdHandler = (input) => {
+    setYmd(input.target.value)
+  }
+  console.log(apiInfo)
   return (
     <div className="App">
       <h2>Today is {apiInfo.date}</h2>
-      <h1>{apiInfo.title}</h1>
-      <img src={apiInfo.url} />
-      <p>{apiInfo.explanation}</p>
-      <footer>Copywrite: {apiInfo.copyright}</footer>
+      <Daily info={apiInfo} />
+      <section>
+        <nav>
+        <Search ymd={ymd} ymdHandler={ymdHandler}/>
+      {/*  <button onClick={setDate(ymd)}>Search</button> */}
+        </nav>
+        <Yesterday info={pastInfo} />
+      </section>
     </div>
   );
 }
