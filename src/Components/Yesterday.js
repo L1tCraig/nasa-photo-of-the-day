@@ -13,9 +13,9 @@ background-size: fill
 `;
     return (
         <Pastcard>
-            <h1>{pastData.title}</h1>
+            <h1 className='chatBubble'>{pastData.title}</h1>
             <img src='https://api.nasa.gov/assets/img/favicons/favicon-192.png' />
-            <p>{pastData.explanation}</p>
+            <p className='chatBubble'>{pastData.explanation}</p>
             <footer>Copyright: {pastData.copyright}</footer>
         </Pastcard>
     )

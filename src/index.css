@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.chatBubble {
+  background-color: white;
+  opacity: 0.4;
+  border: 0.25rem groove darkblue;
+  border-radius: 1.5rem;
+}

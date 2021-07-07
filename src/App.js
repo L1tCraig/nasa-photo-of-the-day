@@ -18,7 +18,7 @@ function App() {
     })
   },[])
    useEffect(() => {
-  axios.get(nasaApi + '&date=' + {date})
+  axios.get(nasaApi + '&date=' + date)
     .then((dateInfo) =>{
       setPastInfo(dateInfo.data)
     })
@@ -27,15 +27,23 @@ function App() {
 
   const ymdHandler = (input) => {
     setYmd(input.target.value)
+    console.log(input.target.value)
   }
-  console.log(apiInfo)
+
+function dateHandler(e) {
+  // keeps the form from refreshing losing the ymd
+  e.preventDefault()
+  setDate(ymd)
+}
+
+ 
   return (
     <div className="App">
       <h2>Today is {apiInfo.date}</h2>
       <Daily info={apiInfo} />
       <section>
         <nav>
-        <Search ymd={ymd} ymdHandler={ymdHandler}/>
+        <Search ymd={ymd} ymdHandler={ymdHandler} dateHandler={dateHandler}/>
       {/*  <button onClick={setDate(ymd)}>Search</button> */}
         </nav>
         <Yesterday info={pastInfo} />

@@ -14,9 +14,9 @@ background-size: fill
 
 return (
     <Card >
-      <h1>{dailyInfo.title}</h1>
+      <h1 className='chatBubble'>{dailyInfo.title}</h1>
       <img src='https://api.nasa.gov/assets/img/favicons/favicon-192.png' />
-      <p>{dailyInfo.explanation}</p>
+      <p className='chatBubble'>{dailyInfo.explanation}</p>
       <footer>Copywrite: {dailyInfo.copyright}</footer>
     </Card>
 )
